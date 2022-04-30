@@ -10,6 +10,12 @@ export default class MyScene extends THREE.Scene {
   constructor(camera: THREE.Camera) {
     super();
     this.camera = camera;
+    window.addEventListener("keydown", (e) => {
+      this.inputSet.add(e.key);
+    });
+    window.addEventListener("keyup", (e) => {
+      this.inputSet.delete(e.key);
+    });
   }
 
   private readonly models = new Map<string, THREE.Object3D>();
@@ -44,5 +50,18 @@ export default class MyScene extends THREE.Scene {
     this.add(ambientLight);
   }
 
-  update(): void {}
+  update(): void {
+    if (this.inputSet.has("w")) {
+      this.camera.position.z -= 0.1;
+    }
+    if (this.inputSet.has("s")) {
+      this.camera.position.z += 0.1;
+    }
+    if (this.inputSet.has("a")) {
+      this.camera.position.x -= 0.1;
+    }
+    if (this.inputSet.has("d")) {
+      this.camera.position.x += 0.1;
+    }
+  }
 }
