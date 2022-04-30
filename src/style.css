@@ -7,3 +7,33 @@ html,body{
   width: 100vw;  
   overflow: hidden;
 }
+.startOverlay{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.startOverlay .startBtn{
+  color: rgb(204, 231, 231);
+  cursor: pointer;
+  width: 600px;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 50px;
+  font-family: 'Roboto', sans-serif;
+  border: 2px solid rgb(171, 207, 181);
+  background-color: rgba(21, 44, 28, 0.42);
+  user-select: none;
+  transition: background-color 0.2s ease-in-out;
+}
+.startOverlay .startBtn:hover{
+  background-color: rgba(85, 187, 227, 0.7);
+}

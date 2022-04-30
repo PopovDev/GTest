@@ -5,19 +5,6 @@ import { MTLLoader } from "three/examples/jsm/loaders/MTLLoader";
 export default class MyScene extends THREE.Scene {
   private readonly mtlLoader = new MTLLoader();
   private readonly objLoader = new OBJLoader();
-  private readonly camera: THREE.Camera;
-  private readonly inputSet: Set<string> = new Set();
-  constructor(camera: THREE.Camera) {
-    super();
-    this.camera = camera;
-    window.addEventListener("keydown", (e) => {
-      this.inputSet.add(e.key);
-    });
-    window.addEventListener("keyup", (e) => {
-      this.inputSet.delete(e.key);
-    });
-  }
-
   private readonly models = new Map<string, THREE.Object3D>();
   async loadModels(mtl: Array<string>, obj: Array<string>) {
     for (const m of mtl) {
@@ -38,6 +25,7 @@ export default class MyScene extends THREE.Scene {
     );
 
     const cottageObj = this.models.get("assets/cottage_obj.obj")!.clone();
+    
     cottageObj.position.set(0, 0, -10);
     cottageObj.scale.set(0.1, 0.1, 0.1);
 
@@ -48,20 +36,5 @@ export default class MyScene extends THREE.Scene {
     this.add(cottageObj);
     this.add(light);
     this.add(ambientLight);
-  }
-
-  update(): void {
-    if (this.inputSet.has("w")) {
-      this.camera.position.z -= 0.1;
-    }
-    if (this.inputSet.has("s")) {
-      this.camera.position.z += 0.1;
-    }
-    if (this.inputSet.has("a")) {
-      this.camera.position.x -= 0.1;
-    }
-    if (this.inputSet.has("d")) {
-      this.camera.position.x += 0.1;
-    }
   }
 }
